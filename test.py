@@ -36,11 +36,19 @@ cv2.waitKey(0)
 # since findContours alters the image 
 contours, hierarchy = cv2.findContours(edged,  cv2.RETR_LIST , cv2.CHAIN_APPROX_SIMPLE) 
 contours = list(contours)
-
-for i in range(len(contours)-1):
+i=0
+while i != -1:
+    print(len(contours), i)
     rect = cv2.boundingRect(contours[i])
     print(cv2.contourArea(contours[i]))
-    if  cv2.contourArea(contours[i]) > 1000: del contours[i]
+    try:
+        if  cv2.contourArea(contours[i]) > 1200 or cv2.contourArea(contours[i]) < 400: 
+            contours.pop(i)
+            i -= 1
+        else: 
+            i += 1
+    except:
+        i = -1
     
 # print(contours[0])
 # half = cv2.resize(edged, (0, 0), fx = 0.8, fy = 0.8)
