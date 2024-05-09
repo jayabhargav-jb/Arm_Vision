@@ -1,8 +1,9 @@
 import cv2 
 import numpy as np 
 import matplotlib.pyplot as plot
+# from clustering import *
 
-image = cv2.imread('img_real.jpg') 
+image = cv2.imread('img_real.jpg')
 image = cv2.resize(image, (0, 0), fx = 0.8, fy = 0.8)
 cv2.waitKey(0) 
 
@@ -22,15 +23,25 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # mask = np.zeros((h+2, w+2), np.uint8)
 # cv2.floodFill(imFlood, mask, (0,0), 0)
 
-
 # Find Canny edges 
-edged = cv2.Canny(gray, 0, 100) 
+
+kernel = np.array([[5]*5]*5)
+print(kernel)
+gray_dilated = cv2.dilate(gray, kernel)
+edged = cv2.Canny(gray_dilated, 0, 200) 
 cv2.waitKey(0) 
   
 # Finding Contours 
 # Use a copy of the image e.g. edged.copy() 
 # since findContours alters the image 
-contours, hierarchy = cv2.findContours(edged,  cv2.RETR_TREE , cv2.CHAIN_APPROX_SIMPLE) 
+contours, hierarchy = cv2.findContours(edged,  cv2.RETR_LIST , cv2.CHAIN_APPROX_SIMPLE) 
+contours = list(contours)
+
+for i in range(len(contours)-1):
+    rect = cv2.boundingRect(contours[i])
+    print(cv2.contourArea(contours[i]))
+    if  cv2.contourArea(contours[i]) > 1000: del contours[i]
+    
 # print(contours[0])
 # half = cv2.resize(edged, (0, 0), fx = 0.8, fy = 0.8)
 cv2.imwrite("canny.jpg", edged)
@@ -41,7 +52,10 @@ print("Number of Contours found = " + str(len(contours)))
 
 # Draw all contours 
 # -1 signifies drawing all contours 
-cv2.drawContours(image, contours, -1, (0, 255, 0), 2) 
+# cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
+# print("before:",len(contours)) 
+# contours = agglomerative_cluster(contours, 0.0001)
+# print("after:",len(contours))
 
 for c in contours:
     rect = cv2.boundingRect(c)
@@ -53,9 +67,9 @@ for c in contours:
     cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
     cv2.putText(image,str((x,y,w,h)),(x+w+10,y+h),0,0.3,(0,255,0))
 
-
 # plot.imshow(image)
 # plot.show()
+image = cv2.resize(image, (0, 0), fx = 0.7, fy = 0.7)
 cv2.imshow('Contours', image)
 cv2.imwrite('actual.jpg', image)
 cv2.waitKey(0) 
