@@ -26,7 +26,6 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # Find Canny edges 
 
 kernel = np.array([[5]*5]*5)
-print(kernel)
 gray_dilated = cv2.dilate(gray, kernel)
 edged = cv2.Canny(gray_dilated, 0, 200) 
 cv2.waitKey(0) 
@@ -36,20 +35,21 @@ cv2.waitKey(0)
 # since findContours alters the image 
 contours, hierarchy = cv2.findContours(edged,  cv2.RETR_LIST , cv2.CHAIN_APPROX_SIMPLE) 
 contours = list(contours)
-i=0
-while i != -1:
-    print(len(contours), i)
-    rect = cv2.boundingRect(contours[i])
-    print(cv2.contourArea(contours[i]))
-    try:
-        if  cv2.contourArea(contours[i]) > 1200 or cv2.contourArea(contours[i]) < 400: 
-            contours.pop(i)
-            i -= 1
-        else: 
-            i += 1
-    except:
-        i = -1
-    
+# i=0
+# while i != -1:
+#     try:
+#         print(len(contours), i)
+#         print(cv2.contourArea(contours[i]))
+#         if  cv2.contourArea(contours[i]) > 401 or cv2.contourArea(contours[i]) < 400: 
+#             contours.pop(i)
+#             print("hey")
+#         i += 1
+#     except IndexError:
+#         i == -1    
+#         break
+
+
+contours[:] = [x for x in contours if not(cv2.contourArea(x) > 450 or cv2.contourArea(x) < 50)]
 # print(contours[0])
 # half = cv2.resize(edged, (0, 0), fx = 0.8, fy = 0.8)
 cv2.imwrite("canny.jpg", edged)
@@ -71,9 +71,8 @@ for c in contours:
     # if  cv2.contourArea(c) > 1000: continue
     # print (cv2.contourArea(c))
     x,y,w,h = rect
-    print(x,y,w,h)
     cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)
-    cv2.putText(image,str((x,y,w,h)),(x+w+10,y+h),0,0.3,(0,255,0))
+    cv2.putText(image,str(cv2.contourArea(c)),(x+w+10,y+h),0,0.3,(0,255,0))
 
 # plot.imshow(image)
 # plot.show()
