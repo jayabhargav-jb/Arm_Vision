@@ -2,7 +2,7 @@ import cv2
 import numpy as np 
 import matplotlib.pyplot as plot
 # from clustering import *
-
+# test on rpi
 image = cv2.imread('img_real.jpg')
 image = cv2.resize(image, (0, 0), fx = 0.8, fy = 0.8)
 cv2.waitKey(0) 
