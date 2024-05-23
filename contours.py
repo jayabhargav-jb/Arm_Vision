@@ -25,8 +25,12 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # Find Canny edges 
 
-kernel = np.array([[5]*5]*5)
+kernel = np.array([[5]*5]*5) 
+# kernel = np.array([[1/16, 2/16, 1/16], [2/16, 4/16, 2/16], [1/16, 2/16, 1/16]])
+# https://en.wikipedia.org/wiki/Kernel_(image_processing)
+# kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]]) # sharpening filter 
 gray_dilated = cv2.dilate(gray, kernel)
+# gray_dilated = cv2.filter2D(gray, -1, kernel) # sharpening filter
 edged = cv2.Canny(gray_dilated, 0, 200) 
 cv2.waitKey(0) 
   
@@ -49,10 +53,10 @@ contours = list(contours)
 #         break
 
 
-contours[:] = [x for x in contours if not(cv2.contourArea(x) > 450 or cv2.contourArea(x) < 50)]
+# contours[:] = [x for x in contours if not(cv2.contourArea(x) > 300 or cv2.contourArea(x) < 50)]
 # print(contours[0])
 # half = cv2.resize(edged, (0, 0), fx = 0.8, fy = 0.8)
-cv2.imwrite("canny.jpg", edged)
+# cv2.imwrite("canny.jpg", edged)
 # cv2.imshow('Canny Edges After Contouring', half) 
 cv2.waitKey(0) 
   
@@ -78,6 +82,6 @@ for c in contours:
 # plot.show()
 image = cv2.resize(image, (0, 0), fx = 0.7, fy = 0.7)
 cv2.imshow('Contours', image)
-cv2.imwrite('actual.jpg', image)
+# cv2.imwrite('actual.jpg', image)
 cv2.waitKey(0) 
 cv2.destroyAllWindows() 

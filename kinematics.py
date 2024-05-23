@@ -11,12 +11,20 @@ l5_a = 4.8
 
 L1 = list()
 
-L1.append(RevoluteDH(d=l1_d, a=l2_a, alpha=np.pi/2, qlim = [-28, -58])) # min=0, max=100    
-L1.append(RevoluteDH(d=0, a= l3_a, alpha=0, qlim=[-8, -60])) # min=170, max = 20 INVERSE MAPPED
-L1.append(RevoluteDH(d=0, a= l4_a, alpha=0, qlim=[69, 15]))# min = 90-21 = 69, max = 90-75 = 15
-L1.append(RevoluteDH(d=0, a= l5_a, alpha=0, qlim=[0, 90]))# min = 10, max= 95
+# L1.append(RevoluteDH(d=l1_d, a=l2_a, alpha=np.pi/2, qlim=np.array([-58,-28 ]))) # min=0, max=100    
+# L1.append(RevoluteDH(d=0, a= l3_a, alpha=0, qlim=np.array([-60,-8 ]))) # min=170, max = 20 INVERSE MAPPED
+# L1.append(RevoluteDH(d=0, a= l4_a, alpha=0, qlim=np.array([ 15,69])))# min = 90-21 = 69, max = 90-75 = 15
+# L1.append(RevoluteDH(d=0, a= l5_a, alpha=0, qlim=np.array([ 90,0])))# min = 10, max= 95
 
+# L1.append(RevoluteDH(d=l1_d, a=l2_a, alpha=np.pi/2, qlim=np.array([28,58 ]))) # min=0, max=100    
+# L1.append(RevoluteDH(d=0, a= l3_a, alpha=0, qlim=np.array([8,60]))) # min=170, max = 20 INVERSE MAPPED
+# L1.append(RevoluteDH(d=0, a= l4_a, alpha=0, qlim=np.array([ 15,69])))# min = 90-21 = 69, max = 90-75 = 15
+# L1.append(RevoluteDH(d=0, a= l5_a, alpha=0, qlim=np.array([ 0,90])))# min = 10, max= 95
 
+L1.append(RevoluteDH(d=l1_d, a=l2_a, alpha=np.pi/2))
+L1.append(RevoluteDH(d=0, a= l3_a, alpha=0))
+L1.append(RevoluteDH(d=0, a= l4_a, alpha=0))
+L1.append(RevoluteDH(d=0, a= l5_a, alpha=0))
 
 # L1[1] = Link('revolute', 'd', l1_d, 'a', 0, 'alpha', 0, 'modified')
 # L1[2] = Link('revolute', 'd', 0, 'a', l2_a, 'alpha', l2_alp, 'modified')
@@ -25,8 +33,9 @@ L1.append(RevoluteDH(d=0, a= l5_a, alpha=0, qlim=[0, 90]))# min = 10, max= 95
 # L1[5] = Link('revolute', 'd', 0, 'a', l5_a, 'alpha', 0, 'modified')
 arm = SerialLink(L1)
 
-hom_mat = arm.fkine([0, 0, 0, 0])
+hom_mat = arm.fkine([0, 30, 60, 30])
+print(type(hom_mat))
 
-print(arm.ikine_LM(hom_mat))
+print(arm.ikine_LM(hom_mat).q)
 print(arm._T)
 # arm.teach()
