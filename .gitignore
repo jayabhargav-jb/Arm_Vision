@@ -1,1 +1,9 @@
 *.xlsx
+__pycache__
+actual.jpg
+canny.jpg
+contour_point_simple.jpg
+img.py
+img.ipynb
+test_white.png
+test.png
