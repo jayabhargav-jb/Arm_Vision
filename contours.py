@@ -1,11 +1,11 @@
-import cv2 
+import cv2
 import numpy as np 
 import matplotlib.pyplot as plot
 # from clustering import *
 # test on rpi
 image = cv2.imread('img_real.jpg')
 image = cv2.resize(image, (0, 0), fx = 0.8, fy = 0.8)
-cv2.waitKey(0) 
+# cv2.waitKey(0) 
 
 h, w, _ = image.shape
 h_needed = 720
@@ -32,7 +32,7 @@ kernel = np.array([[5]*5]*5)
 gray_dilated = cv2.dilate(gray, kernel)
 # gray_dilated = cv2.filter2D(gray, -1, kernel) # sharpening filter
 edged = cv2.Canny(gray_dilated, 0, 200) 
-cv2.waitKey(0) 
+# cv2.waitKey(0) 
   
 # Finding Contours 
 # Use a copy of the image e.g. edged.copy() 
@@ -53,12 +53,12 @@ contours = list(contours)
 #         break
 
 
-# contours[:] = [x for x in contours if not(cv2.contourArea(x) > 300 or cv2.contourArea(x) < 50)]
+contours[:] = [x for x in contours if not(cv2.contourArea(x) > 300 or cv2.contourArea(x) < 50)]
 # print(contours[0])
 # half = cv2.resize(edged, (0, 0), fx = 0.8, fy = 0.8)
 # cv2.imwrite("canny.jpg", edged)
 # cv2.imshow('Canny Edges After Contouring', half) 
-cv2.waitKey(0) 
+# # cv2.waitKey(0) 
   
 print("Number of Contours found = " + str(len(contours))) 
 
