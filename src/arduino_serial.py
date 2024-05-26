@@ -1,3 +1,16 @@
+"""
+Serial Communiation Link for the Arduino
+
+Connect to /dev/ttyACM0 and send commands to the Arduino
+
+Commands:
+    home(): Home the robot
+    pos(bas, btm, mid, top): Move the robot to position
+    pick(): Turn on the electromagnet
+    drop(): Drop the object at drop position
+    rest(): Rest the robot, for least torque on the motors
+"""
+
 import serial
 from time import sleep
 
@@ -31,11 +44,20 @@ def pos(bas, btm, mid, top):
 def drop():
     """Drop the picked item"""
     s.write(b"drop")
-    wait()
+    sleep(2)
 
 def pick():
     """Turn on the electro-magnet"""
     s.write(b"pick")
-    wait()
+    sleep(2)
 
+def home():
+    """Home the robot"""
+    s.write(b"home")
+    sleep(2)
+
+def rest():
+    """Robot position for rest"""
+    s.write(b"rest")
+    sleep(2)
 

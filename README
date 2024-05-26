@@ -1,0 +1,5 @@
+# Cobot for Electronics Workbench
+
+# Usage
+
+- Copy the files from the build directory to respective devices & run the main.py file

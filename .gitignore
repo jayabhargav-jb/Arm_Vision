@@ -8,3 +8,9 @@ img.py
 img.ipynb
 test_white.png
 test.png
+
+# Python venv files
+bin/*
+include/*
+lib/*
+lib64/*
