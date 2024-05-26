@@ -25,7 +25,7 @@ res_dict_test = {'time': 0.040622095999424346,
            }
 
 
-def proc_func(test = 0):
+def proc_func(test = 0, path = "./assets/original.jpg"):
     
     # print(res_dict)
     if test:
@@ -35,7 +35,7 @@ def proc_func(test = 0):
         api_url="https://detect.roboflow.com",
         api_key="P0d4OwuZDmHRjacqXJtf"
         )
-        res_dict = CLIENT.infer("original.jpg", model_id="component_recognition_v2/2")
+        res_dict = CLIENT.infer(path, model_id="component_recognition_v2/2")
 
     user_input = input("""These are the components type to be selected:
     LED
@@ -51,4 +51,4 @@ def proc_func(test = 0):
             return x,y
 
 if __name__ == "__main__":
-    proc_func(1)
+    print(proc_func(1))
