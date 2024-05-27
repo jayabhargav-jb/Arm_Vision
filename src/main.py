@@ -12,9 +12,6 @@ def main():
     top_angle = mapping.map_top(joint_angles_in_deg[3])
     arduino_serial.pos(base_angle, btm_angle, mid_angle, top_angle)
     arduino_serial.pick()
-    
-    # need to write code to move arm away from workspace
-
     arduino_serial.drop()
     return None
 
