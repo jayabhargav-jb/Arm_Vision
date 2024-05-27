@@ -6,6 +6,7 @@ import arduino_serial
 def main():
     component_2D_coordinates = img_proc.proc_func(1)
     joint_angles_in_deg = arm_kinematics.inverse_kinematics(component_2D_coordinates)
+    print(joint_angles_in_deg)
     base_angle = joint_angles_in_deg[0]
     btm_angle = mapping.map_btm(joint_angles_in_deg[1])
     mid_angle = mapping.map_mid(joint_angles_in_deg[2])

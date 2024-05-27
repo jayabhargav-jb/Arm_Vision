@@ -30,16 +30,16 @@ def pos(bas, btm, mid, top):
     """Move arm to positions given in the arguments"""
     s.write(("bas, "+ str(bas)).encode())
     print("Moved base")
-    sleep(2)
+    sleep(5)
     s.write(("btm, "+ str(btm)).encode())
     print("Moved bottom")
-    sleep(2)
+    sleep(5)
     s.write(("mid, "+ str(mid)).encode())
     print("Moved mid")
-    sleep(2)
+    sleep(5)
     s.write(("top, "+ str(top)).encode())
     print("Moved top")
-    sleep(2)
+    sleep(5)
 
 def drop():
     """Drop the picked item"""

@@ -26,7 +26,7 @@ def inverse_kinematics(xy_tuple):
 
     # x, y = img_proc.proc_func(1)
     x, y = xy_tuple
-    z = 2.25
+    z = 1.5
 
     # req_position_arr = [x, y, z]
     req_pose_arr = [[0.8829, 0.4695, 0, x], [0, 0, -1, y], [-0.4695, 0.8829, 0, z], [0,0,0,1]]
