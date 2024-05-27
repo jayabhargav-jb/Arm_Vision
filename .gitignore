@@ -20,3 +20,5 @@ pyvenv.cfg
 Include
 lib
 Scripts
+
+requirements.txt
