@@ -26,9 +26,8 @@ import PIL
 
 res_dict_test = {'time': 0.03687704300000405, 'image': {'width': 4000, 'height': 3000}, 'predictions': [{'x': 1531.25, 'y': 1917.96875, 'width': 515.625, 'height': 328.125, 'confidence': 0.7944501042366028, 'class': 'CAPACITOR', 'class_id': 0, 'detection_id': 'bdfeaaf4-cd9d-4036-aaec-adf6a05d7399'}, {'x': 2984.375, 'y': 400.390625, 'width': 515.625, 'height': 269.53125, 'confidence': 0.7825040221214294, 'class': 'CAPACITOR', 'class_id': 0, 'detection_id': 'd54a2269-5077-41f1-8fed-c19dd00eb4c0'}, {'x': 708.984375, 'y': 1781.25, 'width': 269.53125, 'height': 343.75, 'confidence': 0.7706283330917358, 'class': 'CAPACITOR', 'class_id': 0, 'detection_id': '45bf7074-1475-4edb-b038-f7583f7662e8'}, {'x': 2986.328125, 'y': 400.390625, 'width': 503.90625, 'height': 253.90625, 'confidence': 0.7632450461387634, 'class': 'LED', 'class_id': 1, 'detection_id': '7faaecd1-271b-4d1f-8451-d0e23f8655f2'}, {'x': 324.21875, 'y': 357.421875, 'width': 492.1875, 'height': 378.90625, 'confidence': 0.7066272497177124, 'class': 'TRANSISTOR', 'class_id': 3, 'detection_id': '886be934-0c14-431d-9551-0d265e49f133'}, {'x': 2011.71875, 'y': 1197.265625, 'width': 437.5, 'height': 214.84375, 'confidence': 0.6960435509681702, 'class': 'CAPACITOR', 'class_id': 0, 'detection_id': '248eeff7-8da7-4755-b01c-5fd11f56430c'}, {'x': 2609.375, 'y': 937.5, 'width': 125.0, 'height': 390.625, 'confidence': 0.6377803087234497, 'class': 'RESISTOR', 'class_id': 2, 'detection_id': '2c72764f-a346-44e3-b872-5a9c84491559'}, {'x': 1601.5625, 'y': 947.265625, 'width': 273.4375, 'height': 175.78125, 'confidence': 0.6368553638458252, 'class': 'RESISTOR', 'class_id': 2, 'detection_id': 'ef0d65ad-42cd-4f48-8d85-7f98b33f760d'}]}
 
-def proc_func(test = 0, path = "./assets/original.jpg"):
+def proc_func(test = 0, path = "./assets/original.jpg", user_input = "RESISTOR"):
     
-    # print(res_dict)
     if test:
         res_dict = res_dict_test
     else:
@@ -37,12 +36,7 @@ def proc_func(test = 0, path = "./assets/original.jpg"):
         api_key="P0d4OwuZDmHRjacqXJtf"
         )
         res_dict = CLIENT.infer(path, model_id="component_recognition_v2/2")
-    print(res_dict)
-    user_input = input("""These are the components type to be selected:
-    LED
-    RESISTOR
-    CAPACITOR
-    Please Choose: """)
+    # print(res_dict)
 
     for prediction_list in res_dict['predictions']:
         if prediction_list['class'] == user_input:

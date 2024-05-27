@@ -4,7 +4,7 @@ import mapping
 import arduino_serial
 
 def main():
-    component_2D_coordinates = img_proc.proc_func(1)
+    component_2D_coordinates = img_proc.proc_func(1, user_input="RESISTOR")
     joint_angles_in_deg = arm_kinematics.inverse_kinematics(component_2D_coordinates)
     print(joint_angles_in_deg)
     base_angle = joint_angles_in_deg[0]
