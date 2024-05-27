@@ -17,7 +17,7 @@ from time import sleep
 s = serial.Serial("/dev/ttyACM0")
 
 s.write("home".encode())
-
+sleep(2)
 def wait():
     """Wait for Arduino to complete the serial print"""
     line = str("")

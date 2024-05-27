@@ -26,12 +26,14 @@ def inverse_kinematics(xy_tuple):
 
     # x, y = img_proc.proc_func(1)
     x, y = xy_tuple
-    z = 2.25
-
+    z = 1.2
+    joint_angles = [0, 0, 0, 0]
     # req_position_arr = [x, y, z]
     req_pose_arr = [[0.8829, 0.4695, 0, x], [0, 0, -1, y], [-0.4695, 0.8829, 0, z], [0,0,0,1]]
+    # req_pose_arr = [[1,0,0, x], [0, 1, 0, y], [0,0,1, z], [0,0,0,1]]
     req_pose_se3 = SE3(req_pose_arr)
-
+    # print(x,y,z)
+    # while joint_angles[1]<30:
     joint_angles = arm.ikine_LM(req_pose_se3).q
 
     # print(joint_angles[0]*(180/np.pi), joint_angles[1]*(180/np.pi), joint_angles[2]*(180/np.pi), joint_angles[3]*(180/np.pi))
