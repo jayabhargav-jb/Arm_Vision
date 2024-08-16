@@ -32,18 +32,16 @@ import PIL
 
 res_dict_test = {'time': 0.035279596000009406, 'image': {'width': 4000, 'height': 3000}, 'predictions': [{'x': 236.328125, 'y': 417.96875, 'width': 464.84375, 'height': 554.6875, 'confidence': 0.5773434638977051, 'class': 'CAPACITOR', 'class_id': 0, 'detection_id': 'b2ea39f9-4980-42d2-b31a-43009d1d6b05'}, {'x': 3199.21875, 'y': 697.265625, 'width': 421.875, 'height': 105.46875, 'confidence': 0.5764647126197815, 'class': 'RESISTOR', 'class_id': 2, 'detection_id': '5d65004a-51a7-4920-828f-64d6d04873d3'}, {'x': 1160.15625, 'y': 2041.015625, 'width': 179.6875, 'height': 355.46875, 'confidence': 0.5531340837478638, 'class': 'RESISTOR', 'class_id': 2, 'detection_id': '248bc746-acc1-4576-819a-0d817fab8b22'}, {'x': 1630.859375, 'y': 759.765625, 'width': 207.03125, 'height': 246.09375, 'confidence': 0.4855283200740814, 'class': 'RESISTOR', 'class_id': 2, 'detection_id': 'e0515c66-e012-478b-9677-41a5f5b8c994'}]}
 
-def proc_func(test = 0, path = "../assets/original.jpg", user_input = "RESISTOR", api_key_file = "./src/api_key.txt" ):
+def proc_func(test = 0, path = "../assets/original.jpg", user_input = "RESISTOR"):
     
     pixels_per_cm = 127
 
     if test:
         res_dict = res_dict_test
     else:
-        with open(api_key_file, 'r') as f:
-            api_key_text = f.read()
         CLIENT = InferenceHTTPClient(
         api_url="https://detect.roboflow.com",
-        api_key=api_key_text
+        api_key="P0d4OwuZDmHRjacqXJtf"
         )
         res_dict = CLIENT.infer(path, model_id="component_recognition_v2/2")
     # print(res_dict)

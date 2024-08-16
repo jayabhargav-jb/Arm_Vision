@@ -21,4 +21,7 @@ Include
 lib
 Scripts
 
+#ROBOFLOW API KEY
+src/api_key.txt
+
 requirements.txt
